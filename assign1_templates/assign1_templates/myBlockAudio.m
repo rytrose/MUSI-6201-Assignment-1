@@ -41,7 +41,7 @@ while(n <= size_x(1))
     i_e = n + blockSize - 1;
     
     % Calculate timestamp
-    timestamp = (blockSize/(2*fs)) + (i_s/fs);
+    timestamp = i_s/fs;
     
     % Make block
     thisBlock = x(i_s : min(size_x(1), i_e) );
