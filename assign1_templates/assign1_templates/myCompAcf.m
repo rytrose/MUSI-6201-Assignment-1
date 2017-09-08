@@ -2,13 +2,10 @@ function [r] = myCompAcf (inputVector, bIsNormalized)
 
 %% Computes the ACF of an input with optional normalization
 % Input:
-%   x:          (N x 1) float vector, input signal
-%   blockSize:  int, block size of the blockwise process
-%   hopSize:    int, hop size of the blockwise process
-%   fs:         float, sample rate in Hz
+%   inputVector:	(N x 1) float vector, block of audio
+%   bIsNormalized: 	bool variable for normalization of ACF 
 % Output:
-%   f0:         (numBlocks x 1) float vector, detected pitch (Hz) per block
-%   timeInSec:  (numBlocks x 1) float vector, time stamp (sec) of each block
+%   r:				(N x 1) float vector, ACF of the inputVector
 
 % set uninitialized input arguments
 if (nargin < 2)
@@ -22,12 +19,20 @@ if ((m<=1 && n<=1) || (m>1 && n>1))
 end
 
 %% Please insert your ACF computation code here
-
+r = zeros(size(inputVector));
+i = 1;
+input_size = size(inputVector);
+while i <= input_size(1) 
+    laggedVec = vertcat(inputVector(1:i), zeros(length(inputVector) - i, 1));
+    r(i) = sum(laggedVec.*inputVector);
+    i = i + 1;
+end
 
 % normalize result
 if (bIsNormalized)
     %% Please inset your normalization code here
-    
+    normalization = sum(inputVector.^2);
+    r = r./normalization;
 end
 
 end
