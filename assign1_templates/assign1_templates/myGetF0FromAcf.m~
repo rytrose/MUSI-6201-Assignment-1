@@ -20,8 +20,8 @@ end
 
 %% Please insert your code here
 n = 1;
-acfVector = medfilt2(acfVector, [20 1]);
-max_val = -1;
+acfVector = medfilt2(acfVector, [5 1]);
+max = acfVector(1);
 max_i = 1;
 mid = ceil(length(acfVector)/2);
 flag = false;
@@ -31,12 +31,9 @@ peaks = myPeaks(acfVector);
 
 % look for local maxima
 while n <= length(peaks)
-    maxes = [acfVector(floor(peaks(n))), acfVector(ceil(peaks(n)))];
-    this_max = max(maxes);
-    if(this_max >= max_val)
-        max_val = this_max;
-        max_i = peaks(n);
-        flag = true;
+    if(peak(n) >= max)
+        max = max(acfVector(floor(peak(n))), acfVector(ceil(peak(n))));
+        max_i = peak(n);
     end
     n = n + 1;
 end

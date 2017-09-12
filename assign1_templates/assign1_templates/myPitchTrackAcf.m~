@@ -36,19 +36,9 @@ end
 blocks_dims = size(blocks);
 num_blocks = blocks_dims(2);
 acf_size = (blockSize * 2) - 1;
-acfs = zeros(acf_size, num_blocks);
-block = 1;
-while (block <= num_blocks)
-    acfs(:, block) = myCompAcf(blocks(:, block), true);
-    block = block + 1;
-end
+acfs = 
 
 % compute the pitch in Hz for each block (myGetF0FromACF)
-f0 = zeros(num_blocks, 1);
-block = 1;
-while (block <= num_blocks)
-    acfVector = acfs(:, block);
-    f0(block) = myGetF0FromAcf(acfVector, fs);
-    block = block + 1;
-end
+
+
 end
