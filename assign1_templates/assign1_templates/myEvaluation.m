@@ -13,7 +13,7 @@ function [errCentRms] = myEvaluation(estimation, annotation)
 if (n1>1)
     error('illegal estimation vector ');
 end
-[m2,n2] = size(blockSize);
+[m2,n2] = size(annotation);
 if (n2>1)
     error('illegal annotation vector');
 end
@@ -22,8 +22,23 @@ if (m1~=m2)
 end
 
 %% Please write your code here, Follow the steps as per the comments
+vals = zeros(0, 1);
+n = 1;
+while(n <= length(estimation))
+   if(annotation(n) ~= 0)
+      estInMidi = myFreq2MidiPitch(estimation(n));
+      annInMidi = myFreq2MidiPitch(annotation(n));
+      diff = abs(annInMidi - estInMidi);
+      vals = vertcat(vals, [diff]);      
+   end
+   n = n + 1;
+end
 
-
-
+% RMS = sqrt( (1/n)(x_1^2 + x_2^2 + ... + x_n^2) )
+% https://en.wikipedia.org/wiki/Root_mean_square
+vals_sqrd = vals.^2;
+vals_summed = sum(vals_sqrd);
+vals_div = vals_summed / length(vals);
+errCentRms = sqrt(vals_div);
 
 end
