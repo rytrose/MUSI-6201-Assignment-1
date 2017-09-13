@@ -26,6 +26,10 @@ ylabel('abs err in hz')
 [onset_seconds1, duration_seconds1, pitch_frequency1, quantized_frequency1] = textread('01-D_AMairena.f0.Corrected.txt','%f %f %f %f'); 
 [y1, fs] = audioread('01-D_AMairena.wav');
 estimation1 = myPitchTrackAcf(y1, 1024, 512, fs);
+%figure(3)
+%plot(estimation1);
+%figure(4)
+%plot(pitch_frequency1);
 rms1 = myEvaluation(estimation1, pitch_frequency1);
 
 [onset_seconds2, duration_seconds2, pitch_frequency2, quantized_frequency2] = textread('24-M1_AMairena-Martinete.f0.Corrected.txt','%f %f %f %f'); 

@@ -20,7 +20,7 @@ end
 
 %% Please insert your code here
 n = 1;
-acfVector = medfilt2(acfVector, [20 1]);
+%acfVector = medfilt2(acfVector, [5 1]); % uncomment for median filtering
 max_val = -1;
 max_i = 1;
 mid = ceil(length(acfVector)/2);

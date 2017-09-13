@@ -22,14 +22,16 @@ if (m1~=m2)
 end
 
 %% Please write your code here, Follow the steps as per the comments
-vals = zeros(0, 1);
+vals = zeros(length(estimation), 1);
 n = 1;
+count = 0;
 while(n <= length(estimation))
    if(annotation(n) ~= 0)
       estInMidi = myFreq2MidiPitch(estimation(n));
       annInMidi = myFreq2MidiPitch(annotation(n));
-      diff = abs(annInMidi - estInMidi);
-      vals = vertcat(vals, [diff]);      
+      diff = 100 * abs(annInMidi - estInMidi);
+      vals(n) = diff;
+      count = count + 1;
    end
    n = n + 1;
 end
@@ -38,7 +40,7 @@ end
 % https://en.wikipedia.org/wiki/Root_mean_square
 vals_sqrd = vals.^2;
 vals_summed = sum(vals_sqrd);
-vals_div = vals_summed / length(vals);
+vals_div = vals_summed / count;
 errCentRms = sqrt(vals_div);
 
 end
