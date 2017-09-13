@@ -28,7 +28,7 @@ while(n <= length(estimation))
    if(annotation(n) ~= 0)
       estInMidi = myFreq2MidiPitch(estimation(n));
       annInMidi = myFreq2MidiPitch(annotation(n));
-      diff = abs(annInMidi - estInMidi);
+      diff = abs(annInMidi - estInMidi) * 100;
       vals = vertcat(vals, [diff]);      
    end
    n = n + 1;
