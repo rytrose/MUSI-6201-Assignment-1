@@ -25,9 +25,9 @@ shifted = zeros(length(inputVector) - 1, 1);
 shifted = vertcat(shifted, inputVector);
 shifted = vertcat(shifted, zeros(length(inputVector), 1));
 while i <= length(r)
-    laggedVec = shifted(1:length(inputVector));
+    laggedVec = shifted(i:length(inputVector) + i - 1);
     r(i) = sum(laggedVec.*inputVector);
-    shifted = vertcat(shifted(2:length(shifted)), zeros(1, 1));
+    %shifted = vertcat(shifted(2:length(shifted)), zeros(1, 1));
     i = i + 1;
 end
 
